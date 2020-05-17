@@ -1,6 +1,11 @@
 # package directories
 node_modules
 jspm_packages
-
-# Serverless directories
-.serverless
+npm-debug.log
+.env
+.DS_Store
+.nyc*node
+coverage
+*.xml
+.nyc_coverage
+.nyc_output
