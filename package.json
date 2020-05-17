@@ -1,0 +1,26 @@
+{
+  "name": "polizas",
+  "version": "1.0.0",
+  "description": "para calcular las polizas de trabajadores ",
+  "main": "index.js",
+  "scripts": {
+    "test-with-coverage-sonarqube": "nyc --reporter=lcov --reporter=text-lcov --report-dir=.nyc_coverage mocha --exit",
+    "test-with-coverage": "nyc --reporter=text --report-dir=.nyc_coverage mocha --exit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "serverless-http": "^2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.2",
+    "mocha-data-driven": "^1.0.1",  
+    "supertest": "^4.0.2",
+    "babel-plugin-istanbul": "^6.0.0",
+    "chai": "^4.2.0",
+    "mocha-junit-reporter": "^1.23.3",
+    "nyc": "^15.0.0"
+  }
+}
