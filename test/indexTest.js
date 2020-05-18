@@ -4,9 +4,6 @@ const app = require('../index.js');
 const request = require('supertest');
 const config = require('../config/config.js');
 var  price_policy = 0;
-var company_perc = 0;
-
-
 
 describe ('calcular pólizas', () => {
     
@@ -20,8 +17,7 @@ describe ('calcular pólizas', () => {
         {
             request(app).get('/calcular').then((res) => 
             {                 
-              //  console.log(res);
-                var outputJson  = JSON.parse(res.text); 
+                var outputJson  = JSON.parse(res.text);
                 console.log(outputJson);
                 expect(outputJson).to.contain.property('calculo_nomina');
                 expect(outputJson).to.contain.property('costo_contrato_empresa');

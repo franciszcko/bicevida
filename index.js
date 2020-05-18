@@ -21,7 +21,8 @@ app.get('/calcular', function (req, res) {
         outputJson = { calculo_nomina: "Nomina con detalle copago empleado",
                        detalle_empleados: [],      
                        costo_contrato_empresa:0,
-                       porcentaje_cobertura_empresa:0};
+                       porcentaje_cobertura_empresa:0,
+                       };
 
         resp.on('data', (chunk) => {            
             
