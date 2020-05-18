@@ -4,12 +4,15 @@ const app = require('../index.js');
 const request = require('supertest');
 const config = require('../config/config.js');
 var  price_policy = 0;
+var company_perc = 0;
+
+
+
 describe ('calcular pólizas', () => {
     
     after(() => {
       console.log("finish test..........");
     })
-
  
     describe('get endpoint calcular...', function()
     {        
@@ -22,7 +25,8 @@ describe ('calcular pólizas', () => {
                 console.log(outputJson);
                 expect(outputJson).to.contain.property('calculo_nomina');
                 expect(outputJson).to.contain.property('costo_contrato_empresa');
-                var perc_employe = 100 - config.perc_company ;
+                expect(outputJson).to.contain.property('porcentaje_cobertura_empresa');
+                var perc_employe = 100 - outputJson.porcentaje_cobertura_empresa;
                 
                 for (value in outputJson.detalle_empleados)
                 {
@@ -84,17 +88,14 @@ describe('get endpoint calcular...', function()
             {                 
               //  console.log(res);
                 var outputJson  = JSON.parse(res.text);
-                var costo = price_policy * config.perc_company/100;         
+                var costo = price_policy * outputJson.porcentaje_cobertura_empresa/100;         
                 expect(outputJson.costo_contrato_empresa).to.contain.equals(costo)              
                    
                 done();
 
-            }).catch((err) => done(err));
-                               
+            }).catch((err) => done(err));                               
 
-        });          
-   
-
+        });
 });
 
 

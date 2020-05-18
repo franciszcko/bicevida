@@ -8,6 +8,7 @@ const config = require('./config/config.js');
 var price_policy = 0;
 let output;
 let outputJson;
+var company_perc = 0;
 
 app.get('/calcular', function (req, res) {
     price_policy = 0;
@@ -19,11 +20,13 @@ app.get('/calcular', function (req, res) {
 
         outputJson = { calculo_nomina: "Nomina con detalle copago empleado",
                        detalle_empleados: [],      
-                       costo_contrato_empresa:0};
+                       costo_contrato_empresa:0,
+                       porcentaje_cobertura_empresa:0};
 
         resp.on('data', (chunk) => {            
             
-            data = JSON.parse(chunk);  
+            data = JSON.parse(chunk);      
+            company_perc = data.policy.company_percentage;
             myArray = data.policy.workers; 
             console.log(myArray); 
             getPricePolicy(myArray).then(price_policy => {
@@ -32,8 +35,9 @@ app.get('/calcular', function (req, res) {
 
         });
         resp.on('end', () => {
-            var costo = price_policy * config.perc_company/100;
+            var costo = price_policy * company_perc/100;
             outputJson.costo_contrato_empresa = costo;
+            outputJson.porcentaje_cobertura_empresa = company_perc;
             res.send(JSON.stringify(outputJson));  
         });
     });
